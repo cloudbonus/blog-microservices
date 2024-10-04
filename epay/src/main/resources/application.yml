@@ -34,3 +34,8 @@ topic:
     PROCESS: t.process
     CANCEL: t.cancel
     UPDATE: t.update
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server:8761/eureka/

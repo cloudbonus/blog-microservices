@@ -1,0 +1,33 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+#      default-filters: TokenRelay
+#  security:
+#    oauth2:
+#      client:
+#        provider:
+#          keycloak:
+#            issuer-uri: http://keycloak:9090/realms/blog
+#        registration:
+#          keycloak:
+#            provider: keycloak
+#            client-id: client-id
+#            client-secret: client-secret
+#            authorization-grant-type: authorization_code
+#            scope: openid
+
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server:8761/eureka/

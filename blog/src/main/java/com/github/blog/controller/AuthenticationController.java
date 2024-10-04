@@ -23,12 +23,12 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    @PostMapping("sign-up")
+    @PostMapping("register")
     public UserDto signUp(@RequestBody @Validated(UserValidationGroup.onCreate.class) UserRequest request) {
         return authenticationService.signUp(request);
     }
 
-    @PostMapping("sign-in")
+    @PostMapping("token")
     public JwtResponse authenticateAndGetToken(@RequestBody @Validated(UserValidationGroup.onAuthenticate.class) UserRequest request) {
         return authenticationService.signIn(request);
     }

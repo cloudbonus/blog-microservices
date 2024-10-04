@@ -2,10 +2,13 @@
 .idea/
 *.iml
 *.iws
-  
+
 # Maven
 log/
 target/
+
+#Amplicode
+amplicode.xml
 
 # Java Class Files
 *.class
@@ -17,6 +20,10 @@ blog/build/
 # Epay
 epay/.gradle/
 epay/build/
+
+# Discovery
+discovery-server/.gradle/
+discovery-server/build/
 
 # Gateway
 api-gateway/.gradle/
