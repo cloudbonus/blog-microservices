@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+                   logicalFilePath="db/changelog/db.changelog-1.0.0.xml">
+
+    <changeSet id="blog-schema" author="Raman Haurylau">
+        <sqlFile encoding="utf8" path="../migration/01.create-schema.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-user" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/02.create-user-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-user_info" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/03.create-user_info-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-role" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/04.create-role-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-user_role" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/05.create-user_role-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-post" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/06.create-post-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-comment" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/07.create-comment-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-tag" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/08.create-tag-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-post_tag" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/09.create-post_tag-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-reaction" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/10.create-reaction-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-post_reaction" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/11.create-post_reaction-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-comment_reaction" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/12.create-comment_reaction-table.sql"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-order" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/13.create-order-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="blog-base-values" author="Raman Haurylau" dbms="postgresql">
+        <sqlFile encoding="utf8" path="../migration/14.insert-values-into-tables.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangeLog>

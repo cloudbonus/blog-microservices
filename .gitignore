@@ -1,0 +1,23 @@
+# Intellij
+.idea/
+*.iml
+*.iws
+  
+# Maven
+log/
+target/
+
+# Java Class Files
+*.class
+
+# Blog
+blog/.gradle/
+blog/build/
+
+# Epay
+epay/.gradle/
+epay/build/
+
+# Gateway
+api-gateway/.gradle/
+api-gateway/build/
