@@ -10,7 +10,7 @@ import com.github.blog.controller.dto.response.JwtResponse;
 public interface AuthenticationService {
     UserDto signUp(UserRequest request);
 
-    JwtResponse signIn(UserRequest request);
+//    JwtResponse signIn(UserRequest request);
 
     UserDto update(Long id, UserRequest request);
 }

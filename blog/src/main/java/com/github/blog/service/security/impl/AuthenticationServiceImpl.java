@@ -12,7 +12,7 @@ import com.github.blog.service.exception.ExceptionEnum;
 import com.github.blog.service.exception.impl.CustomException;
 import com.github.blog.service.mapper.UserMapper;
 import com.github.blog.service.security.AuthenticationService;
-import com.github.blog.service.security.JwtService;
+//import com.github.blog.service.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
@@ -36,11 +36,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final RoleRepository roleRepository;
 
     private final UserMapper userMapper;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
 
-    private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
-    private final UserDetailsServiceImpl userDetailsService;
+//    private final JwtService jwtService;
+//    private final AuthenticationManager authenticationManager;
+//    private final UserDetailsServiceImpl userDetailsService;
 
     @Override
     public UserDto signUp(UserRequest request) {
@@ -53,30 +53,30 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         user.getRoles().add(role);
 
-        user.setPassword(passwordEncoder.encode(request.password()));
+//        user.setPassword(passwordEncoder.encode(request.password()));
 
         userRepository.save(user);
         log.debug("User signed up successfully with username: {}", request.username());
         return userMapper.toDto(user);
     }
 
-    @Override
-    public JwtResponse signIn(UserRequest request) {
-        log.debug("Signing in user with username: {}", request.username());
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.username(), request.password())
-        );
-
-        if (!authentication.isAuthenticated()) {
-            throw new CustomException(ExceptionEnum.AUTHENTICATION_FAILED);
-        }
-
-        UserDetails user = userDetailsService.loadUserByUsername(request.username());
-        String jwt = jwtService.generateToken(user);
-        log.debug("User signed in successfully with username: {}", request.username());
-
-        return new JwtResponse(jwt, user.getUsername());
-    }
+//    @Override
+//    public JwtResponse signIn(UserRequest request) {
+//        log.debug("Signing in user with username: {}", request.username());
+//        Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(request.username(), request.password())
+//        );
+//
+//        if (!authentication.isAuthenticated()) {
+//            throw new CustomException(ExceptionEnum.AUTHENTICATION_FAILED);
+//        }
+//
+//        UserDetails user = userDetailsService.loadUserByUsername(request.username());
+//        String jwt = jwtService.generateToken(user);
+//        log.debug("User signed in successfully with username: {}", request.username());
+//
+//        return new JwtResponse(jwt, user.getUsername());
+//    }
 
     @Override
     public UserDto update(Long id, UserRequest request) {
@@ -89,7 +89,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user = userMapper.partialUpdate(request, user);
 
         if (!StringUtils.isBlank(request.password())) {
-            user.setPassword(passwordEncoder.encode(request.password()));
+//            user.setPassword(passwordEncoder.encode(request.password()));
         }
 
         log.debug("User updated successfully with ID: {}", id);

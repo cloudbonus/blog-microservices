@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author Raman Haurylau
  */
-@Validated
-@RestController
-@RequestMapping("auth")
-@RequiredArgsConstructor
-public class AuthenticationController {
-
-    private final AuthenticationService authenticationService;
-
-    @PostMapping("register")
-    public UserDto signUp(@RequestBody @Validated(UserValidationGroup.onCreate.class) UserRequest request) {
-        return authenticationService.signUp(request);
-    }
-
-    @PostMapping("token")
-    public JwtResponse authenticateAndGetToken(@RequestBody @Validated(UserValidationGroup.onAuthenticate.class) UserRequest request) {
-        return authenticationService.signIn(request);
-    }
-}
+//@Validated
+//@RestController
+//@RequestMapping("auth")
+//@RequiredArgsConstructor
+//public class AuthenticationController {
+//
+//    private final AuthenticationService authenticationService;
+//
+//    @PostMapping("register")
+//    public UserDto signUp(@RequestBody @Validated(UserValidationGroup.onCreate.class) UserRequest request) {
+//        return authenticationService.signUp(request);
+//    }
+//
+//    @PostMapping("token")
+//    public JwtResponse authenticateAndGetToken(@RequestBody @Validated(UserValidationGroup.onAuthenticate.class) UserRequest request) {
+//        return authenticationService.signIn(request);
+//    }
+//}

@@ -19,18 +19,18 @@ import java.util.stream.Collectors;
 /**
  * @author Raman Haurylau
  */
-@Service
-@RequiredArgsConstructor
-@Transactional(readOnly = true)
-public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserRepository userRepository;
-
-    @Override
-    public UserDetails loadUserByUsername(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new CustomException(ExceptionEnum.BAD_CREDENTIALS));
-
-        Collection<? extends GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-
-        return new UserDetailsImpl(user.getId(), user.getUsername(), user.getPassword(), authorities);
-    }
-}
+//@Service
+//@RequiredArgsConstructor
+//@Transactional(readOnly = true)
+//public class UserDetailsServiceImpl implements UserDetailsService {
+//    private final UserRepository userRepository;
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String username) {
+//        User user = userRepository.findByUsername(username).orElseThrow(() -> new CustomException(ExceptionEnum.BAD_CREDENTIALS));
+//
+//        Collection<? extends GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+//
+//        return new UserDetailsImpl(user.getId(), user.getUsername(), user.getPassword(), authorities);
+//    }
+//}
