@@ -6,9 +6,6 @@ spring:
     name: api-gateway
   security:
     oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: http://keycloak:8080/realms/spring-cloud-gateway-realm/protocol/openid-connect/certs
       client:
         provider:
           keycloak:
@@ -20,6 +17,9 @@ spring:
             client-secret: aqPrZXespWemoZk0oTaLPzgaD6rFfTdp
             authorization-grant-type: authorization_code
             scope: openid
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://keycloak:8080/realms/spring-cloud-gateway-realm/protocol/openid-connect/certs
   cloud:
     gateway:
       discovery:
@@ -30,7 +30,7 @@ spring:
       - TokenRelay
       routes:
         - id: blog-service
-          uri: http://blog-service:8080
+          uri: http://blog-service:8100
           predicates:
             - Path=/blog/**
         - id: epay-service
@@ -43,7 +43,8 @@ eureka:
     serviceUrl:
       defaultZone: http://discovery-server:8761/eureka/
 
-token:
-  converter:
-    principal-attribute: preferred_username
-    resource-id: demo-app
+jwt:
+  auth:
+    converter:
+      principal-attribute: preferred_username
+      resource-id: spring-cloud-gateway-client

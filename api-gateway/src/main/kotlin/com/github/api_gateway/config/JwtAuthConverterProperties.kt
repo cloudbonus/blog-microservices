@@ -8,8 +8,8 @@ import java.util.Optional
  * @author Raman Haurylau
  */
 @Configuration
-@ConfigurationProperties(prefix = "token.converter")
-class TokenConverterProperties(
+@ConfigurationProperties(prefix = "jwt.auth.converter")
+class JwtAuthConverterProperties(
     var resourceId: String?,
     var principalAttribute: String?,
 ) {

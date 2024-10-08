@@ -1,10 +1,9 @@
 package com.github.api_gateway
 
+import org.slf4j.LoggerFactory
+import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.security.core.annotation.AuthenticationPrincipal
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient
-import org.springframework.security.oauth2.core.oidc.user.OidcUser
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Mono
@@ -15,9 +14,12 @@ import reactor.core.publisher.Mono
  */
 @RestController
 class GatewayController {
-    @PreAuthorize("isAuthenticated()")
+    private val log = LoggerFactory.getLogger(javaClass)
+
     @GetMapping("/whoami")
-    fun index(): Mono<String> {
-        return Mono.just("Hello")
+    @PreAuthorize("hasRole('USER')")
+    fun index(authentication: Authentication): Mono<ResponseEntity<String>> {
+        log.info("{}", authentication.isAuthenticated)
+        return Mono.just(ResponseEntity.ok("Hello ${authentication.name}. Roles: ${authentication.authorities}"))
     }
 }
