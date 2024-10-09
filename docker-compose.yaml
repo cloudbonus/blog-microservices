@@ -89,31 +89,29 @@ services:
 #    networks:
 #      - network
 #
-#  epay-service:
-#    container_name: epay-service
-#    depends_on:
-#      - postgres
-#    build:
-#      context: epay
-#      dockerfile: ./Dockerfile
-#    restart: on-failure
-#    env_file:
-#      - ./.env
-#    environment:
-#      - SPRING_DATASOURCE_URL=$EPAY_DATASOURCE_URL
-#      - SPRING_DATASOURCE_USERNAME=$POSTGRES_USER
-#      - SPRING_DATASOURCE_PASSWORD=$POSTGRES_PASSWORD
-#      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
-#    ports:
-#      - ${EPAY_LOCAL_PORT}:${EPAY_DOCKER_PORT}
-#    networks:
-#      - network
-#
+  epay-service:
+    container_name: epay-service
+    depends_on:
+      - postgres
+    build:
+      context: epay
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    env_file:
+      - ./.env
+    environment:
+      - SPRING_DATASOURCE_URL=$EPAY_DATASOURCE_URL
+      - SPRING_DATASOURCE_USERNAME=$POSTGRES_USER
+      - SPRING_DATASOURCE_PASSWORD=$POSTGRES_PASSWORD
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
+    networks:
+      - network
+
 #  blog-service:
 #    container_name: blog-service
 #    depends_on:
 #      - postgres
-#      - redis
+##      - redis
 #    build:
 #      context: blog
 #      dockerfile: ./Dockerfile
@@ -152,39 +150,35 @@ services:
     networks:
       - network
 
-#
-#  zookeeper:
-#    image: wurstmeister/zookeeper
-#    container_name: zookeeper
-#    restart: no
-#    env_file:
-#      - ./.env
-#    ports:
-#      - ${ZOOKEEPER_LOCAL_PORT}:${ZOOKEEPER_DOCKER_PORT}
-#    networks:
-#      - network
-#
-#  kafka:
-#    image: wurstmeister/kafka
-#    container_name: kafka
-#    depends_on:
-#      - zookeeper
-#    restart: no
-#    env_file:
-#      - ./.env
-#    environment:
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: DOCKER_INTERNAL:PLAINTEXT,DOCKER_EXTERNAL:PLAINTEXT
-#      KAFKA_LISTENERS: DOCKER_INTERNAL://:29092,DOCKER_EXTERNAL://:9092
-#      KAFKA_ADVERTISED_LISTENERS: DOCKER_INTERNAL://kafka:29092,DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
-#      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER_INTERNAL
-#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:$ZOOKEEPER_DOCKER_PORT
-#      KAFKA_BROKER_ID: 1
-#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-#      KAFKA_CREATE_TOPICS: "t.request:1:1,t.update:1:1"
-#    ports:
-#      - ${KAFKA_LOCAL_PORT}:${KAFKA_DOCKER_PORT}
-#    networks:
-#      - network
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    restart: no
+    env_file:
+      - ./.env
+    networks:
+      - network
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    restart: no
+    env_file:
+      - ./.env
+    environment:
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: DOCKER_INTERNAL:PLAINTEXT,DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: DOCKER_INTERNAL://:29092,DOCKER_EXTERNAL://:9092
+      KAFKA_ADVERTISED_LISTENERS: DOCKER_INTERNAL://kafka:29092,DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:$ZOOKEEPER_DOCKER_PORT
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CREATE_TOPICS: "t.request:1:1,t.update:1:1"
+    networks:
+      - network
 
 volumes:
   pgdata:

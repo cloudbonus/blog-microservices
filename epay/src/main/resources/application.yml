@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: epay-service
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml

@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.web.server.SecurityWebFilterChain
+import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository
 
 
 /**
@@ -25,10 +26,13 @@ class SecurityConfig {
                     .permitAll()
                     .anyExchange()
                     .authenticated()
-           }
-            .oauth2ResourceServer { oauth2 -> oauth2.jwt {jwtCustomizer ->
-                jwtCustomizer.jwtAuthenticationConverter(KeycloakJwtTokenConverter(properties))
-            }}
+            }
+            .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
+            .oauth2ResourceServer { oauth2 ->
+                oauth2.jwt { jwtCustomizer ->
+                    jwtCustomizer.jwtAuthenticationConverter(KeycloakJwtTokenConverter(properties))
+                }
+            }
         return http.build()
     }
 

@@ -27,14 +27,14 @@ spring:
           enabled: true
           lower-case-service-id: true
       default-filters:
-      - TokenRelay
+        - TokenRelay=
       routes:
         - id: blog-service
-          uri: http://blog-service:8100
+          uri: lb://blog-service
           predicates:
             - Path=/blog/**
         - id: epay-service
-          uri: http://epay-service:8081
+          uri: lb://epay-service
           predicates:
             - Path=/epay/**
 
