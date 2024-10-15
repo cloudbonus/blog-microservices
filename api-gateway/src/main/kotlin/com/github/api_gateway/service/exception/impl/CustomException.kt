@@ -5,4 +5,4 @@ import com.github.api_gateway.service.exception.ExceptionEnum
 /**
  * @author Raman Haurylau
  */
-class CustomException(message: String, val exceptionEnum: ExceptionEnum) : RuntimeException(message)
+class CustomException(val exceptionEnum: ExceptionEnum) : RuntimeException()
