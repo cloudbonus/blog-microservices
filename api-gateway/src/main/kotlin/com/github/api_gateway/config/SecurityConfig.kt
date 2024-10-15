@@ -6,7 +6,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.web.server.SecurityWebFilterChain
-import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository
 
 
 /**
@@ -18,7 +17,7 @@ import org.springframework.security.web.server.context.NoOpServerSecurityContext
 class SecurityConfig {
 
     @Bean
-    fun securityFilterChain(http: ServerHttpSecurity, properties: JwtAuthConverterProperties): SecurityWebFilterChain {
+    fun securityFilterChain(http: ServerHttpSecurity, properties: JwtAuthProperties): SecurityWebFilterChain {
         http
             .csrf(ServerHttpSecurity.CsrfSpec::disable)
             .authorizeExchange { exchange ->
@@ -27,7 +26,6 @@ class SecurityConfig {
                     .anyExchange()
                     .authenticated()
             }
-            .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
             .oauth2ResourceServer { oauth2 ->
                 oauth2.jwt { jwtCustomizer ->
                     jwtCustomizer.jwtAuthenticationConverter(KeycloakJwtTokenConverter(properties))

@@ -14,7 +14,7 @@ spring:
           keycloak:
             provider: keycloak
             client-id: spring-cloud-gateway-client
-            client-secret: aqPrZXespWemoZk0oTaLPzgaD6rFfTdp
+            client-secret: ${jwt.auth.secret}
             authorization-grant-type: authorization_code
             scope: openid
       resourceserver:
@@ -45,6 +45,7 @@ eureka:
 
 jwt:
   auth:
-    converter:
-      principal-attribute: preferred_username
-      resource-id: spring-cloud-gateway-client
+    principal-attribute: preferred_username
+    resource-id: spring-cloud-gateway-client
+    secret: aqPrZXespWemoZk0oTaLPzgaD6rFfTdp
+    token-url: http://keycloak:8080/realms/spring-cloud-gateway-realm/protocol/openid-connect/token
